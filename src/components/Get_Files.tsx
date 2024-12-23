@@ -56,7 +56,7 @@ export async function Get_File(md5: string): Promise<{ link: string; artist: str
     }
   }
 
-export async function Get_File_by_performer(performer: string): Promise<{ link: string; artist: string; title: string; performer: string; editor: string; }[]> {
+export async function Get_File_by_performer(performer: string): Promise<{ link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string;}[]> {
     try {
         const response = await fetch(`${discordbdd}/files/website`, {
             method: 'GET',
@@ -71,7 +71,7 @@ export async function Get_File_by_performer(performer: string): Promise<{ link: 
 
         const datatmp = await response.json();
 
-        const data: { link: string; artist: string; title: string; performer: string; editor: string; }[] = [];
+        const data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; }[] = [];
         datatmp.forEach((element: { website_file: any; }) => {
             if (element.website_file && element.website_file.performer === performer) {
                 data.push({
@@ -79,7 +79,8 @@ export async function Get_File_by_performer(performer: string): Promise<{ link: 
                     artist: element.website_file.artist,
                     title: element.website_file.title,
                     performer: element.website_file.performer,
-                    editor: element.website_file.editor
+                    editor: element.website_file.editor,
+                    website_file_path: element.website_file.website_file_path
                 });
             }
         });

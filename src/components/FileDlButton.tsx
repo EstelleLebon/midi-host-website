@@ -4,9 +4,10 @@ import { Button } from "@/src/components/ui/button";
 
 interface FileDlButtonProps {
     website_file_path: string;
+    classname: string;
 }
 
-export function FileDlButton({ website_file_path }: FileDlButtonProps) {
+export function FileDlButton({ website_file_path, classname }: FileDlButtonProps) {
     const [buttonLoading, setButtonLoading] = useState(false);
     const [downloaded, setDownloaded] = useState(false);
 
@@ -28,7 +29,7 @@ export function FileDlButton({ website_file_path }: FileDlButtonProps) {
                 setDownloaded(true);
                 window.location.href = website_file_path;
             }, 3000); // Adjust the timeout duration as needed
-        }} variant="default" className="mt-4">
+        }} variant="default" className={classname}>
             {downloaded ? 'Download started' : 'Download'}
         </Button>
     )
