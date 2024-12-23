@@ -7,9 +7,11 @@ export default async function Home() {
   return (
     <div className="">
       <Header />
-      {performers.map((performer, index) => (
-        <Files_by_Performer key={index} performer={performer} />
-      ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {performers.map((performer, index) => (
+          <Files_by_Performer key={index} performer={performer} />
+        ))}
+      </div>
     </div>
   );
 }

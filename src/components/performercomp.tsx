@@ -1,6 +1,7 @@
 "use client"
 import { Get_File_by_performer } from "./Get_Files";
 import { useState, useEffect } from "react";
+import { Card, CardContent, CardTitle } from "./ui/card";
 
 interface FilesByPerformerProps {
   performer: string;
@@ -18,7 +19,7 @@ export function Files_by_Performer({ performer }: FilesByPerformerProps) {
         .then((data: { link: string; artist: string; title: string; performer: string; editor: string; }[]) => {
             const result: { link: string; name: string; }[] = [];
             data.forEach((element: { link: string; artist: string; title: string; performer: string; editor: string; }) => {
-                const elem = {"link" : element.link, "name" : `${element.artist}_${element.title}_${element.performer}_${element.editor}.mid`};
+                const elem = {"link": element.link, "name" : `${element.artist}_${element.title}_${element.performer}_${element.editor}.mid`};
                 result.push(elem);
             });
             setFiles(result);
@@ -31,14 +32,20 @@ export function Files_by_Performer({ performer }: FilesByPerformerProps) {
      }, [performer]);
 
     return (
-        <div>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error.message}</p>}
-            <ul>
+        <div className="p-4">
+
+            <Card className="p-2 bg-gray-400" style={{ height: 'calc((100vh - 180px) / 2)', minHeight: '200px' }}>               
+            <CardTitle className="text-center p-4 bg-gray-200 rounded-lg">{performer}s</CardTitle>
+            <br />
+            <CardContent className="text-center">
+                {loading && <p>Loading...</p>}
+                {error && <p>Error: {error.message}</p>}
                 {files.map((file, index) => (
-                    <li key={index}><a href = {file.link}> {file.name} </a> </li>
+                    <p className="flex flex-wrap gap-2" key={index}><a href = {file.link} className="truncate overflow-hidden whitespace-nowrap"> {file.name} </a> </p>
                 ))}
-            </ul>
+
+            </CardContent>
+            </Card>
         </div>
   );
 }
