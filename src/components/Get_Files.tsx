@@ -1,6 +1,5 @@
 "use server"
-const hosts = require('../../settings/hosts');
-const discordbdd = hosts.discordbdd;
+const discordbdd = process.env.DISCORD_BDD_IP;
 
 export async function Get_Files() {
     try {
