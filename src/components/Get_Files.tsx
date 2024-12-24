@@ -1,8 +1,20 @@
 "use server"
 
-import { LucideToggleRight } from "lucide-react";
-
 const discordbdd = process.env.DISCORD_BDD_IP;
+
+interface WebsiteFile {
+    link: string;
+    artist: string;
+    title: string;
+    performer: string;
+    editor: string;
+    website_file_path: string;
+}
+
+interface DataElement {
+    website_file: WebsiteFile;
+    createdAt: Date;
+}
 
 export async function Get_Files() {
     try {
@@ -72,14 +84,13 @@ export async function Get_File_by_performer(performer: string): Promise<{ link: 
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const datatmp = await response.json();
-        datatmp.sort((a: { createdAt: string; }, b: { createdAt: string; }) => {
+        const datatmp: DataElement[] = await response.json();
+        datatmp.sort((a, b) => {
             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
 
-
         const data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; createdAt:Date}[] = [];
-        datatmp.forEach((element: { website_file: any; createdAt: Date; }) => {
+        datatmp.forEach((element) => {
             if (element.website_file && element.website_file.performer.toLowerCase() === performer.toLowerCase()) {
                 data.push({
                     link: element.website_file.link,

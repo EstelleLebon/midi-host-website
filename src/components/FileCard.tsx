@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { Get_File } from "./Get_Files";
 import { FileDlButton } from "./FileDlButton";
+import React from 'react';
 
+interface FileCardProps {
+    md5: string;
+}
 
-export function FileCard({ md5 }:any) {
+export const FileCard: React.FC<FileCardProps> = ({ md5 }) => {
     const [file, setFile] = useState<{ link: string; artist: string; title: string; performer: string; editor: string; sources: string; comments: string; } | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
-
 
     useEffect(() => {
         if (md5) {
