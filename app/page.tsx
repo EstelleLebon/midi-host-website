@@ -9,7 +9,7 @@ export default async function Home() {
       <Header />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {performers.map((performer, index) => (
-          <Files_by_Performer key={index} performer={performer.toLowerCase()} numb = {15} button = {false} />
+          <Files_by_Performer key={index} performer={performer.toLowerCase()} numb = {10} button = {false} />
         ))}
       </div>
     </div>

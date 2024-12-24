@@ -1,6 +1,6 @@
 "use server"
 
-import { json } from "stream/consumers";
+import { LucideToggleRight } from "lucide-react";
 
 const discordbdd = process.env.DISCORD_BDD_IP;
 
@@ -17,8 +17,11 @@ export async function Get_Files() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        return data;
+        const datatmp = await response.json();
+        datatmp.sort((a: { createdAt: string; }, b: { createdAt: string; }) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+        return datatmp;
     } catch (error) {
         console.error('Error getting all files:', error);
         throw error;
@@ -33,12 +36,12 @@ export async function Get_File(md5: string): Promise<{ link: string; artist: str
                 'Content-Type': 'application/json'
             }
         });
-  
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-  
         const datatmp = await response.json();
+
         const data: { link: string; artist: string; title: string; performer: string; editor: string; sources:string; comments:string; }[] = [];
         data.push({
             link: datatmp.website_file.website_file_path,
@@ -56,7 +59,7 @@ export async function Get_File(md5: string): Promise<{ link: string; artist: str
     }
   }
 
-export async function Get_File_by_performer(performer: string): Promise<{ link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string;}[]> {
+export async function Get_File_by_performer(performer: string): Promise<{ link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; createdAt:Date}[]> {
     try {
         const response = await fetch(`${discordbdd}/files/website`, {
             method: 'GET',
@@ -70,17 +73,22 @@ export async function Get_File_by_performer(performer: string): Promise<{ link: 
         }
 
         const datatmp = await response.json();
+        datatmp.sort((a: { createdAt: string; }, b: { createdAt: string; }) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
 
-        const data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; }[] = [];
-        datatmp.forEach((element: { website_file: any; }) => {
-            if (element.website_file && element.website_file.performer === performer) {
+
+        const data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; createdAt:Date}[] = [];
+        datatmp.forEach((element: { website_file: any; createdAt: Date; }) => {
+            if (element.website_file && element.website_file.performer.toLowerCase() === performer.toLowerCase()) {
                 data.push({
                     link: element.website_file.link,
                     artist: element.website_file.artist,
                     title: element.website_file.title,
                     performer: element.website_file.performer,
                     editor: element.website_file.editor,
-                    website_file_path: element.website_file.website_file_path
+                    website_file_path: element.website_file.website_file_path,
+                    createdAt: new Date(element.createdAt)
                 });
             }
         });
