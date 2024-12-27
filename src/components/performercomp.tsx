@@ -81,25 +81,25 @@ const [files, setFiles] = useState<{ link: string; name: string; path: string; c
             <div className="p-4">
     
                 <Card className="p-2 bg-gray-400">               
-                <a href={`/${performer}`}>
-                    <CardTitle className="text-center p-4 bg-gray-200 rounded-lg hover:bg-black hover:text-white transition-colors duration-300">
-                        {performer}s
-                    </CardTitle>
-                </a>
+                <CardTitle className="text-center p-4 bg-gray-200 rounded-lg">
+                    {performer}s
+                </CardTitle>
+
                 <br />
-                <div className="">
+                <div key={"FileContent"} className="">
                 {files.map((file, index) => (
-                    <a href={file.link} className="" key={index}>
-                        <CardContent className="mb-2 p-1 bg-gray-200 rounded-lg hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify">
+                    
+                        <CardContent className="mb-2 p-1 bg-gray-200 rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-300 flex items-center justify">
                             {loading && <p>Loading...</p>}
                             {error && <p>Error: {error.message}</p>}
                             <FileDlButton website_file_path={file.path} classname="p-4 bg-black hover:bg-gray-200 text-white hover:text-black "/>
-                            <div className="p-4">{new Date(file.createdAt).toLocaleDateString()}</div>
-                            <div className="ml-2">
-                                {file.name}
-                            </div>                   
-                        </CardContent>
-                    </a>
+                            <a href={file.link} className="flex items-center justify" key={index}>
+                                <div key={"CreatedAt"} className="p-4">{new Date(file.createdAt).toLocaleDateString()}</div>
+                                <div key={"FileName"} className="ml-2">
+                                    {file.name}
+                                </div>     
+                            </a>              
+                        </CardContent>                    
                 ))}
                 </div> 
                 </Card>
