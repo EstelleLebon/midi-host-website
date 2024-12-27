@@ -10,8 +10,8 @@ const Loading: React.FC = () => {
                     width: 36px;
                     height: 36px;
                     border-radius: 50%;
-                    border-left-color: #09f;
-                    animation: spin 1s ease infinite;
+                    border-left-color: #000;
+                    animation: spin 2s ease infinite;
                 }
                 @keyframes spin {
                     0% {

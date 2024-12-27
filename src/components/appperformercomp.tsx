@@ -41,7 +41,7 @@ const [files, setFiles] = useState<{ link: string; name: string; path: string; c
             <Card className="overflow-hidden p-2 bg-gray-400" style={{ height: 'calc((100vh - 180px) / 2)', minHeight: '200px' }}>               
                 {loading && <Loading />}
                 {error && <p>Error: {error.message}</p>}
-                {files && (
+                {files && !loading && (
                     <>
                         <a className="" href={`/${performer}`}>
                             <CardTitle className="text-center px-4 py-2 bg-gray-200 rounded-lg hover:bg-black hover:text-white transition-colors duration-300">

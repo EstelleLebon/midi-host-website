@@ -1,7 +1,7 @@
 "use client"
 import { useParams } from 'next/navigation';
 import Header from "@/src/components/Header";
-import { Files_by_Performer } from "@/src/components/appperformercomp";
+import { Files_for_Performer } from "@/src/components/performercomp";
 import { notFound } from 'next/navigation';
 
 
@@ -18,7 +18,7 @@ export default function Page() {
     <div className="">
       <Header />
       <div className="container mx-auto px-4">
-          <Files_by_Performer performer={performer.toLowerCase()} numb = {-1} button = {true}/>
+          <Files_for_Performer performer={performer.toLowerCase()}/>
       </div>
     </div>
   );
