@@ -155,7 +155,7 @@ export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performe
                                             <td className="py-1 px-2">
                                                 <a href={file.link} className="relative group">
                                                     <Button className="p-2 bg-black hover:bg-white text-white hover:text-black transition-colors duration-300" >...</Button>
-                                                    <span role="img" aria-label="details" className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">Details</span> 
+                                                    <span role="img" aria-label="details" className="absolute right-full mr-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">Details</span>
                                                 </a>
                                             </td>
                                             <td className="py-1">
