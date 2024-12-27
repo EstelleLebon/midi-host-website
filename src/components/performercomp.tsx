@@ -83,8 +83,8 @@ export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performe
     };
        
     return (
-        <div className="p-4">
-            <Card className="p-2 bg-gray-400" style={{ width: 'fit-content' }}>
+        <div className="min-w-[1040px] p-4">
+            <Card className="min-w-[1040px] p-2 bg-gray-400">
                 <CardTitle className="text-center p-4 bg-gray-200 rounded-lg">
                     {performer.charAt(0).toUpperCase() + performer.slice(1)}s
                 </CardTitle>
@@ -149,9 +149,9 @@ export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performe
                                     {sortedFiles.map((file, index) => (
                                         <tr key={index} className="text-left border-b border-gray-300">
                                             <td className="py-1 px-1">{file.artist}</td>
-                                            <td className="py-1">{file.title}</td>
-                                            <td className="py-1">{file.editor}</td>
-                                            <td className="py-1">{new Date(file.createdAt).toLocaleDateString()}</td>
+                                            <td className="py-1 px-1">{file.title}</td>
+                                            <td className="py-1 px-1">{file.editor}</td>
+                                            <td className="py-1 px-1">{new Date(file.createdAt).toLocaleDateString()}</td>
                                             <td className="py-1 px-2">
                                                 <a href={file.link} className="relative group">
                                                     <Button className="p-2 bg-black hover:bg-white text-white hover:text-black transition-colors duration-300" >...</Button>
