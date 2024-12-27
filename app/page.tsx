@@ -1,5 +1,5 @@
 import Header from "@/src/components/Header";
-import { Files_by_Performer } from "@/src/components/performercomp";
+import { Files_by_Performer } from "@/src/components/appperformercomp";
 
 
 export default async function Home() {

@@ -49,7 +49,7 @@ export const FileCard: React.FC<FileCardProps> = ({ md5 }) => {
                     {file && <p className="p-2">Editor: {file.editor}</p>}
                     {file && file.sources != " " && <p className="p-2">Source: {file.sources}</p>}
                     {file && file.comments != " " && <p className="p-2">Comment: {file.comments}</p>}
-                    {file && <FileDlButton website_file_path={file.link} classname="mt-4"/>}
+                    {file && <FileDlButton website_file_path={file.link} classname="mt-4 text-xl py-2 px-4 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-300"/>}
                 </CardContent>
             </Card>
         </div>
