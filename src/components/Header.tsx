@@ -14,7 +14,7 @@ const Header = () => {
             </div>
             <div className="flex gap-4 text-gray-200 relative group">
                 <Link href="/solo" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Solos</Link>
-                <Link href="/duet" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Duos</Link>
+                <Link href="/duet" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Duets</Link>
                 <Link href="/trio" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Trios</Link>
                 <Link href="/quartet" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Quartets</Link>
                 <Link href="/quintet" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Quintets</Link>

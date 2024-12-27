@@ -4,6 +4,7 @@ import { Card, CardContent, CardTitle } from "./ui/card";
 import { Get_File } from "./Get_Files";
 import { FileDlButton } from "./FileDlButton";
 import React from 'react';
+import Loading from "./loading";
 
 interface FileCardProps {
     md5: string;
@@ -41,7 +42,7 @@ export const FileCard: React.FC<FileCardProps> = ({ md5 }) => {
                     {file && <p>{file.artist} - {file.title}</p>}
                 </CardTitle>
                 <CardContent className="text-left text-lg text-gray-800 dark:text-gray-200">
-                    {loading && <p className="p-2">Loading...</p>}
+                    {loading && <Loading/>}
                     {error && <p className="p-2">Error: {error.message}</p>}
                     {file && <p className="p-2">Artist: {file.artist}</p>}
                     {file && <p className="p-2">Title: {file.title}</p>}
