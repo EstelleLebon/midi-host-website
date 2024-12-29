@@ -14,12 +14,11 @@ export default function Page() {
       notFound();
     }
 
-  return (
-    <div className="">
-      <Header />
-      <div className="container mx-auto px-4">
-          <Files_for_Performer performer={performer.toLowerCase()}/>
-      </div>
-    </div>
-  );
+  	return (
+		<div className="">
+			<div className="container mx-auto px-4">
+				<Files_for_Performer performer={performer.toLowerCase()}/>
+			</div>
+		</div>
+	);
 }

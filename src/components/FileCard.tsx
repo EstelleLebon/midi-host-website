@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX } from "react";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { Get_File } from "./Get_Files";
 import { FileDlButton } from "./FileDlButton";
@@ -9,6 +9,47 @@ import Loading from "./loading";
 interface FileCardProps {
     md5: string;
 }
+
+const YouTubeEmbed = ({ url }: { url: string }) => {
+    const videoId = url.split('v=')[1]?.split('&')[0];
+    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  
+    return (
+      <>
+        <iframe
+          width="560"
+          height="315"
+          src={embedUrl}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="YouTube video player"
+        ></iframe>
+      </>
+    );
+  };
+  
+  const formatLinks = (text: string): JSX.Element => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+  
+    return (
+      <>
+        {parts.map((part, index) => {
+          if (urlRegex.test(part)) {
+            if (part.includes("youtube.com") || part.includes("youtu.be")) {
+              return <YouTubeEmbed key={index} url={part} />;
+            }
+            return (
+              <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {part}
+              </a>
+            );
+          }
+          return <span key={index}>{part}</span>;
+        })}
+      </>
+    );
+  };
 
 export const FileCard: React.FC<FileCardProps> = ({ md5 }) => {
     const [file, setFile] = useState<{ link: string; artist: string; title: string; performer: string; editor: string; sources: string; comments: string; } | null>(null);
@@ -48,8 +89,8 @@ export const FileCard: React.FC<FileCardProps> = ({ md5 }) => {
                     {file && <p className="p-2">Title: {file.title}</p>}
                     {file && <p className="p-2">Performer: {file.performer}</p>}
                     {file && <p className="p-2">Editor: {file.editor}</p>}
-                    {file && file.sources != " " && <p className="p-2">Source: {file.sources}</p>}
-                    {file && file.comments != " " && <p className="p-2">Comment: {file.comments}</p>}
+                    {file && file.sources != " " && <p className="p-2">Source: {formatLinks(file.sources)}</p>}
+                    {file && file.comments != " " && <p className="p-2">Comment: {formatLinks(file.comments)}</p>}
                     {file && <FileDlButton website_file_path={file.link} classname="mt-4 text-xl py-2 px-4 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-300"/>}
                 </CardContent>
             </Card>

@@ -8,7 +8,6 @@ export default function Page() {
     const md5 = Array.isArray(params?.md5) ? params.md5[0] : params?.md5 ?? '';
     return (
         <div>
-            <Header/>
             <FileCard md5={md5}/>
         </div>
     );

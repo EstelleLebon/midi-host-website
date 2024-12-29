@@ -1,13 +1,14 @@
 "use client"
 import { Get_File_by_performer } from "./Get_Files";
 import { useState, useEffect, SetStateAction } from "react";
+import Link from 'next/link';
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { FileDlButton } from "./FileDlButton";
 import Loading from "./loading";
 import { Button } from "./ui/button";
 
 interface FilesForPerformerProps {
-  performer: string;
+    performer: string;
 }
 
 export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performer}) => {
@@ -20,24 +21,24 @@ export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performe
     const [titleFilter, setTitleFilter] = useState('');
     const [editorFilter, setEditorFilter] = useState('');;
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-    Get_File_by_performer(String(performer))
-        .then((data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path: string; createdAt: Date;}[]) => {
-            const result: { link: string; name: string; path: string; createdAt: string; title: string; artist: string; editor: string; performer: string }[] = [];
-            data.forEach((element: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; createdAt: Date;}) => {
-                const elem = {"link": element.link, "name" : `${element.artist}_${element.title}_${element.performer}_${element.editor}.mid`, "path": element.website_file_path, "createdAt": element.createdAt.toISOString(), "title": element.title, "artist": element.artist, "editor": element.editor, "performer": element.performer};
-                result.push(elem);
+    useEffect(() => {
+        setLoading(true);
+        setError(null);
+        Get_File_by_performer(String(performer))
+            .then((data: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path: string; createdAt: Date;}[]) => {
+                const result: { link: string; name: string; path: string; createdAt: string; title: string; artist: string; editor: string; performer: string }[] = [];
+                data.forEach((element: { link: string; artist: string; title: string; performer: string; editor: string; website_file_path:string; createdAt: Date;}) => {
+                    const elem = {"link": element.link, "name" : `${element.artist}_${element.title}_${element.performer}_${element.editor}.mid`, "path": element.website_file_path, "createdAt": element.createdAt.toISOString(), "title": element.title, "artist": element.artist, "editor": element.editor, "performer": element.performer};
+                    result.push(elem);
+                });
+                setFiles(result);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
             });
-            setFiles(result);
-            setLoading(false);
-        })
-        .catch((error) => {
-            setError(error);
-            setLoading(false);
-        });
-    }, [performer]);
+        }, [performer]);
 
     const handleSort = (key: SetStateAction<string>) => {
         setSortKey(key);
@@ -147,19 +148,29 @@ export const Files_for_Performer: React.FC<FilesForPerformerProps> = ({ performe
                                 </thead>
                                 <tbody>
                                     {sortedFiles.map((file, index) => (
-                                        <tr key={index} className="text-left border-b border-gray-300">
-                                            <td className="py-1 px-1">{file.artist}</td>
-                                            <td className="py-1 px-1">{file.title}</td>
-                                            <td className="py-1 px-1">{file.editor}</td>
-                                            <td className="py-1 px-1">{new Date(file.createdAt).toLocaleDateString()}</td>
-                                            <td className="py-1 px-2">
-                                                <a href={file.link} className="relative group">
-                                                    <Button className="p-2 bg-black hover:bg-white text-white hover:text-black transition-colors duration-300" >...</Button>
-                                                    <span role="img" aria-label="details" className="absolute right-full mr-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">Details</span>
-                                                </a>
+                                        <tr key={index} className="text-left border-b border-gray-300 hover:bg-gray-100 cursor-pointer">
+                                            <td className="py-1 px-1">
+                                                <Link legacyBehavior href={`${file.link}`}>
+                                                    <a className="block w-full h-full">{file.artist}</a>
+                                                </Link>
+                                            </td>
+                                            <td className="py-1 px-1">
+                                                <Link legacyBehavior href={`${file.link}`}>
+                                                    <a className="block w-full h-full">{file.title}</a>
+                                                </Link>
+                                            </td>
+                                            <td className="py-1 px-1">
+                                                <Link legacyBehavior href={`${file.link}`}>
+                                                    <a className="block w-full h-full">{file.editor}</a>
+                                                </Link>
+                                            </td>
+                                            <td className="py-1 px-1">
+                                                <Link legacyBehavior href={`${file.link}`}>
+                                                    <a className="block w-full h-full">{new Date(file.createdAt).toLocaleDateString()}</a>
+                                                </Link>
                                             </td>
                                             <td className="py-1">
-                                                <FileDlButton website_file_path={file.path} classname="p-2 bg-black hover:bg-white text-white hover:text-black transition-colors duration-300"/>
+                                                <FileDlButton website_file_path={file.path} classname="p-2 bg-black hover:bg-white text-white hover:text-black transition-colors duration-300" />
                                             </td>
                                         </tr>
                                     ))}
