@@ -1,6 +1,5 @@
 "use client"
 import { useParams } from 'next/navigation';
-import Header from "@/src/components/Header";
 import { Files_for_Performer } from "@/src/components/performercomp";
 import { notFound } from 'next/navigation';
 
