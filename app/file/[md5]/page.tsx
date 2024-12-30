@@ -1,6 +1,6 @@
 "use client"
 import { useParams } from 'next/navigation';
-import { FileCard } from "@/src/components/FileCard";
+import { FileCard } from "@/src/components/client/FileCard";
 
 export default function Page() {
     const params = useParams();

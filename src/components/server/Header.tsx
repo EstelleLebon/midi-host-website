@@ -1,17 +1,14 @@
+"use server";
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import { HomeLink } from '../client/HomeLink';
+
 
 const Header = () => {
     return (
         <nav className="w-full mx-auto h-80px flex items-center justify-between p-4" style={{maxHeight: "80px", backgroundImage: "url('/headbg.png')", backgroundSize: "100%", backgroundPosition: "center"}}>
-            <div className="text-2xl relative group">
-                <Link href="/">
-                    <Image src="/7a27179e37e90a1c77c74e3bfccfc39e.png" alt="Logo" width={70} height={70} />
-                </Link>
-                <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Home
-                </span>
-            </div>
+            <HomeLink />
             <div className="flex gap-4 text-gray-200 relative group">
                 <Link href="/solo" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Solos</Link>
                 <Link href="/duet" className="border rounded-lg bg-gray-600 p-1 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-300">Duets</Link>

@@ -1,8 +1,8 @@
 "use client"
-import { Get_File_by_performer } from "./Get_Files";
+import { Get_File_by_performer } from "../server/Get_Files";
 import { useState, useEffect, SetStateAction } from "react";
 import Link from 'next/link';
-import { Card, CardContent, CardTitle } from "./ui/card";
+import { Card, CardContent, CardTitle } from "../ui/card";
 import { FileDlButton } from "./FileDlButton";
 import Loading from "./loading";
 

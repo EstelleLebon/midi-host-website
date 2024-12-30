@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, JSX } from "react";
-import { Card, CardContent, CardTitle } from "./ui/card";
-import { Get_File } from "./Get_Files";
+import { Card, CardContent, CardTitle } from "../ui/card";
+import { Get_File } from "../server/Get_Files";
 import { FileDlButton } from "./FileDlButton";
 import React from 'react';
 import Loading from "./loading";

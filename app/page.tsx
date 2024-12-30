@@ -1,4 +1,4 @@
-import { Files_by_Performer } from "@/src/components/appperformercomp";
+import { Files_by_Performer } from "@/src/components/server/appperformercomp";
 
 
 export default async function Home() {
