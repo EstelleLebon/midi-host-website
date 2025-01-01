@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+	reactStrictMode: true,
   	images: {
     	localPatterns: [
       		{
@@ -18,6 +19,9 @@ const nextConfig: NextConfig = {
       		},
     	],
  	},
+	experimental: {
+		authInterrupts: true,
+	},
 };
 
 export default nextConfig;
